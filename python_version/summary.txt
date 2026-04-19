@@ -1,0 +1,15 @@
+Linear fitting by gradient descent
+Data points: 100
+Learning rate: 0.3
+Max iterations: 50
+Initial w: 0.5
+Initial b: 0.5
+Final w: 3.0962849021
+Final b: 4.4403375023
+Final loss: 0.0849316241
+
+Generated files:
+- iteration_first30.csv
+- iteration_all50.csv
+- fit_line_after_50.png
+- loss_curve_50.png
