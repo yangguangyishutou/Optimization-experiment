@@ -1,30 +1,86 @@
 function fitlab_charts(script_dir, x, y, w, b, history)
 %FITLAB_CHARTS 保存拟合直线图与 Loss 曲线图
 
+% 采用简洁、低饱和的配色：深蓝主色 + 中性灰辅助色。
+obs_color = [0.33, 0.45, 0.58];   % 数据点
+fit_color = [0.14, 0.29, 0.45];   % 拟合线
+loss_color = [0.16, 0.38, 0.56];  % 损失曲线
+grid_color = [0.88, 0.90, 0.93];
+txt_color = [0.18, 0.20, 0.24];
+
 % 图1：样本散点 + 最终拟合直线。
-fig1 = figure('Color', 'w');
-scatter(x, y, 25, 'filled');
+fig1 = figure('Color', 'w', 'Position', [120, 120, 920, 560]);
+scatter(x, y, 26, 'filled', ...
+    'MarkerFaceColor', obs_color, ...
+    'MarkerEdgeColor', 'none', ...
+    'MarkerFaceAlpha', 0.75);
 hold on;
 % 在样本区间生成更密集的 x，用来画平滑直线。
 x_line = linspace(min(x), max(x), 200)';
 y_line = w * x_line + b;
-plot(x_line, y_line, 'r-', 'LineWidth', 2);
+plot(x_line, y_line, '-', 'Color', fit_color, 'LineWidth', 3.0);
 xlabel('x');
 ylabel('y');
-title('Linear Fit After 50 Iterations');
-legend('Observed data', sprintf('Fit line: y = %.4fx + %.4f', w, b), 'Location', 'northwest');
+title('Linear Fit After 50 Iterations', 'FontWeight', 'normal');
+legend( ...
+    'Observed data', ...
+    sprintf('fitted line: y = %.4fx + %.4f', w, b), ...
+    'Location', 'northwest', ...
+    'Box', 'off');
+ax1 = gca;
+set(ax1, ...
+    'LineWidth', 1.1, ...
+    'FontName', 'Arial', ...
+    'FontSize', 11, ...
+    'Box', 'off', ...
+    'TickDir', 'out', ...
+    'XColor', txt_color, ...
+    'YColor', txt_color);
 grid on;
-saveas(fig1, fullfile(script_dir, 'fit_line_after_50.png'));
+ax1.GridAlpha = 0.55;
+ax1.GridColor = grid_color;
+ax1.Layer = 'top';
+try
+    exportgraphics(ax1, fullfile(script_dir, 'fit_line_after_50.png'), 'Resolution', 320);
+catch
+    saveas(fig1, fullfile(script_dir, 'fit_line_after_50.png'));
+end
 close(fig1);
 
 % 图2：loss 收敛曲线，观察优化过程是否稳定下降。
-fig2 = figure('Color', 'w');
-plot(history(:, 1), history(:, 4), '-o', 'LineWidth', 1.5, 'MarkerSize', 4);
+fig2 = figure('Color', 'w', 'Position', [140, 140, 920, 560]);
+iter = history(:, 1);
+loss = history(:, 4);
+plot(iter, loss, '-', ...
+    'Color', loss_color, ...
+    'LineWidth', 2.8);
+hold on;
+plot(iter(1:5:end), loss(1:5:end), 'o', ...
+    'MarkerSize', 5.5, ...
+    'MarkerFaceColor', [1 1 1], ...
+    'MarkerEdgeColor', loss_color, ...
+    'LineWidth', 1.1);
 xlabel('Iteration');
 ylabel('Loss (MSE)');
-title('Loss Curve Over 50 Iterations');
+title('Loss Curve Over 50 Iterations', 'FontWeight', 'normal');
+ax2 = gca;
+set(ax2, ...
+    'LineWidth', 1.1, ...
+    'FontName', 'Arial', ...
+    'FontSize', 11, ...
+    'Box', 'off', ...
+    'TickDir', 'out', ...
+    'XColor', txt_color, ...
+    'YColor', txt_color);
 grid on;
-saveas(fig2, fullfile(script_dir, 'loss_curve_50.png'));
+ax2.GridAlpha = 0.55;
+ax2.GridColor = grid_color;
+ax2.Layer = 'top';
+try
+    exportgraphics(ax2, fullfile(script_dir, 'loss_curve_50.png'), 'Resolution', 320);
+catch
+    saveas(fig2, fullfile(script_dir, 'loss_curve_50.png'));
+end
 close(fig2);
 
 end
