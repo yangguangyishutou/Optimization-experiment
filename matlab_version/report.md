@@ -1,21 +1,21 @@
-# Lab Report (MATLAB Version)
+# 实验报告（MATLAB 版本）
 
-## Task
-Use gradient descent to fit `y = w*x + b` for 100 data points.
+## 实验任务
+使用梯度下降法对 100 个数据点进行线性拟合，模型为 `y = w*x + b`。
 
-## Hyperparameters
-- Learning rate: 0.3
-- Max iterations: 50
-- Initial values: `w=0.5`, `b=0.5`
+## 超参数设置
+- 学习率：0.3
+- 最大迭代次数：50
+- 初始值：`w=0.5`，`b=0.5`
 
-## Final Result (Iteration 50)
+## 最终结果（第 50 次迭代）
 - `w = 3.0962849021`
 - `b = 4.4403375023`
 - `Loss = 0.0849316241`
-- Fitted line: `y = 3.0962849021 * x + 4.4403375023`
+- 拟合直线：`y = 3.0962849021 * x + 4.4403375023`
 
-## First 30 Iterations (`w`, `b`, `Loss`)
-| Iteration | w | b | Loss |
+## 前 30 次迭代结果（`w`、`b`、`Loss`）
+| 迭代次数 | w | b | Loss |
 |---:|---:|---:|---:|
 | 1 | 2.1841750861 | 3.6340267550 | 1.7402065253 |
 | 2 | 2.6057448922 | 4.3874374564 | 0.1961320304 |
@@ -48,6 +48,6 @@ Use gradient descent to fit `y = w*x + b` for 100 data points.
 | 29 | 3.0152739379 | 4.4832719590 | 0.0863168858 |
 | 30 | 3.0208831336 | 4.4802991791 | 0.0861852110 |
 
-## Figures
-- `fit_line_after_50.png`: fitted line on top of data scatter
-- `loss_curve_50.png`: loss curve over 50 iterations
+## 图表说明
+- `fit_line_after_50.png`：图 1，50 次迭代后的线性拟合结果（散点为观测数据，直线为拟合结果）
+- `loss_curve_50.png`：图 2，Loss 随迭代次数变化曲线（横轴：迭代次数；纵轴：损失值（MSE））
