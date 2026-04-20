@@ -15,25 +15,25 @@ if isempty(script_dir)
     script_dir = pwd;
 end
 
-% 数据文件与脚本放在同一目录，路径写法更稳，不依赖 MATLAB 当前工作目录。
+% 读入数据。
 x = load(fullfile(script_dir, 'data_x.txt'));
 y = load(fullfile(script_dir, 'data_y.txt'));
 
-% 实验参数。
+% 设置超参数。
 learning_rate = 0.3;
 max_iter = 50;
 init_w = 0.5;
 init_b = 0.5;
 
-% 核心迭代放在独立函数里，入口脚本只负责调用。
+% 调用求解器。
 [w, b, history] = fitlab_solver(x, y, learning_rate, max_iter, init_w, init_b);
 
-% 导出环节拆开，后续要改输出格式时改动更局部。
+% 导出结果。
 fitlab_exports(script_dir, history);
 fitlab_charts(script_dir, x, y, w, b, history);
 fitlab_brief(script_dir, length(x), learning_rate, max_iter, init_w, init_b, w, b, history(end, 4));
 
-% 命令行输出最终一行，便于快速检查收敛结果。
+% 命令行输出最终结果。
 T = array2table(history, 'VariableNames', {'Iteration', 'w', 'b', 'Loss'});
 disp('Final parameters and loss:');
 disp(T(end, :));

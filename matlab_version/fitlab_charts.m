@@ -1,7 +1,7 @@
 function fitlab_charts(script_dir, x, y, w, b, history)
 %FITLAB_CHARTS 保存拟合直线图与 Loss 曲线图
 
-% 统一使用浅色背景与深色文本配色。
+% 使用浅色背景与深色文本配色。
 obs_color = [0.16, 0.56, 0.85];   % 数据点
 fit_color = [0.90, 0.22, 0.21];   % 拟合线
 loss_color = [0.12, 0.53, 0.90];  % 损失曲线
