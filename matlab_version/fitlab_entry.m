@@ -19,7 +19,7 @@ end
 x = load(fullfile(script_dir, 'data_x.txt'));
 y = load(fullfile(script_dir, 'data_y.txt'));
 
-% 实验参数按作业要求固定。
+% 实验参数。
 learning_rate = 0.3;
 max_iter = 50;
 init_w = 0.5;
